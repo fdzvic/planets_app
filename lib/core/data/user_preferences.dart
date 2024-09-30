@@ -18,6 +18,15 @@ class UserPreferences {
   }
 
   // GET y SET de datos de planetas
+  String get favoritePlanet {
+    return _prefs.getString('favoritePlanet') ?? '';
+  }
+
+  set favoritePlanet(String value) {
+    _prefs.setString('favoritePlanet', value);
+  }
+
+  // GET y SET de datos de planetas
   String get listPlanets {
     return _prefs.getString('listPlanets') ?? '';
   }

@@ -51,7 +51,7 @@ class HomeTabletScreen extends StatelessWidget {
                     height: 50,
                   ),
                   PrimaryButton(
-                    text: "Comenzar",
+                    text: "Ver planetas",
                     isLoading: homeState.isLoading,
                     onPressed: () => toContinue(context),
                   )

@@ -51,7 +51,7 @@ class HomeDesktopScreen extends StatelessWidget {
                     height: 50,
                   ),
                   PrimaryButton(
-                    text: "Comenzar",
+                    text: "Ver planetas",
                     isLoading: homeState.isLoading,
                     width: context.width(.2),
                     onPressed: () => toContinue(context),

@@ -8,7 +8,7 @@ import 'package:planets_app/features/planets/presentation/planets/planets_page.d
 class Routes {
   static const String home = '/home';
   static const String planets = '/planets';
-  static const String informationPlanets = '/information-planets/:planetName';
+  static const String informationPlanets = '/planets/:planetName';
   static const String planetNoFound = '/planet-no-found';
 }
 
@@ -32,15 +32,12 @@ final router = GoRouter(
           page(state: state, child: const PlanetsPage()),
     ),
     GoRoute(
-      path:
-          Routes.informationPlanets, // Recibe el parámetro dinámico planetName
+      path: Routes.informationPlanets,
       pageBuilder: (context, state) {
-        final planetName = state.pathParameters[
-            'planetName']!; // Recupera el nombre del planeta de la URL
+        final planetName = state.pathParameters['planetName']!;
         return page(
           state: state,
-          child: InfoPlanetsPage(
-              planetName: planetName), // Pasa el nombre a la página
+          child: InfoPlanetsPage(planetName: planetName),
         );
       },
     ),

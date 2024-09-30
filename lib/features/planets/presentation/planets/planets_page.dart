@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:planets_app/core/presentation/design/atoms/custom_primary_button.dart';
+import 'package:planets_app/core/data/user_preferences.dart';
 import 'package:planets_app/core/presentation/design/atoms/custom_text.dart';
 import 'package:planets_app/core/presentation/design/atoms/custom_text_form_field.dart';
 import 'package:planets_app/core/presentation/design/templates/principal_background.dart';
 import 'package:planets_app/core/presentation/design/tokens/colors.dart';
 import 'package:planets_app/core/presentation/utils/dimens_extension.dart';
+import 'package:planets_app/core/presentation/utils/routes.dart';
 import 'package:planets_app/features/planets/domain/list_planets_response.dart';
 import 'package:planets_app/features/planets/presentation/planets/widgets/card_planet.dart';
 import 'planets_controller.dart';
@@ -41,25 +42,44 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
         if (snapshot.hasData) {
           return Row(
             children: [
-              Container(
+              SizedBox(
                 width: context.width(.5),
-                height: context.height(),
-                alignment: Alignment.center,
                 child: Container(
                   color: colors.blue2,
                   width: context.width(.4),
-                  height: context.height(.3),
+                  margin: const EdgeInsets.only(left: 50),
                   padding: const EdgeInsets.all(20),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
+                      const CustomText(
+                        "Panel de control",
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      const SizedBox(height: 30),
                       CustomTextFormField(
                         label: "Filtrar por nombre del planeta",
                         controller: tecFilter,
                         onChanged: (x) => controller.filterPlanetsByName(x),
                       ),
-                      const SizedBox(height: 10),
-                      PrimaryButton(text: "Buscar", onPressed: () {})
+                      if (prefs.favoritePlanet.isNotEmpty) ...[
+                        const SizedBox(height: 20),
+                        const CustomText(
+                          "Planeta favorito",
+                          fontSize: 24,
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: context.width(.2),
+                          width: context.width(.2),
+                          child: CardPlanet(
+                            imageHeight: context.width(.17),
+                            name: state.favoritePlanet?.name ?? "No hay nombre",
+                            pathImage: state.favoritePlanet?.image ?? "",
+                          ),
+                        )
+                      ]
                     ],
                   ),
                 ),
@@ -97,33 +117,31 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
                             )),
                       )
                     ] else ...[
-                      Expanded(
-                        child: SizedBox(
-                          width: context.width(.3),
-                          child: GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: .75,
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-                            ),
-                            itemCount: state.filterListPlanets!.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  context.go(
-                                      '/information-planets/${state.filterListPlanets![index].name}');
-                                },
-                                child: CardPlanet(
-                                  name: state.filterListPlanets![index].name,
-                                  pathImage:
-                                      state.filterListPlanets![index].image,
-                                  mass: state.filterListPlanets![index].massKg,
-                                ),
-                              );
-                            },
+                      SizedBox(
+                        width: context.width(.4),
+                        height: context.height(.8),
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: .9,
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
                           ),
+                          itemCount: state.filterListPlanets!.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                context.go(
+                                    '${Routes.planets}/${state.filterListPlanets![index].name}');
+                              },
+                              child: CardPlanet(
+                                name: state.filterListPlanets![index].name,
+                                pathImage:
+                                    state.filterListPlanets![index].image,
+                              ),
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(height: 20),

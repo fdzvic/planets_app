@@ -53,7 +53,7 @@ class HomeMobileScreen extends StatelessWidget {
                     height: 30,
                   ),
                   PrimaryButton(
-                    text: "Comenzar",
+                    text: "Ver planetas",
                     isLoading: homeState.isLoading,
                     onPressed: () => toContinue(context),
                   )

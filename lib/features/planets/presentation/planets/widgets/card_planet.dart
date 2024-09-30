@@ -7,34 +7,48 @@ class CardPlanet extends StatelessWidget {
   const CardPlanet({
     super.key,
     this.name,
-    this.diameter,
-    this.mass,
     this.pathImage,
+    this.imageHeight,
   });
 
   final String? name;
-  final String? diameter;
-  final String? mass;
   final String? pathImage;
+  final double? imageHeight;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: colors.blue4,
+      alignment: Alignment.center,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-              bottom: Radius.circular(8),
-            ),
-            child: Hero(
-              tag: "img_hero",
+          SizedBox(
+            height: imageHeight,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(8),
+              ),
               child: Image.network(
                 pathImage ?? "",
-                width: 120,
-                height: 150,
-                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) =>
+                    const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 50),
+                    SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 errorBuilder: (BuildContext context, Object error,
                     StackTrace? stackTrace) {
                   return Image.asset(
@@ -45,18 +59,12 @@ class CardPlanet extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomText(
-                  name,
-                  height: 1.5,
-                ),
-              ],
-            ),
-          )
+          const Expanded(child: SizedBox(height: 10)),
+          CustomText(
+            name,
+            height: 1.5,
+          ),
+          const SizedBox(height: 10)
         ],
       ),
     );

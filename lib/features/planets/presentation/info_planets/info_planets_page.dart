@@ -1,12 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:planets_app/core/data/user_preferences.dart';
 import 'package:planets_app/core/presentation/design/atoms/custom_primary_button.dart';
 import 'package:planets_app/core/presentation/design/templates/principal_background.dart';
+import 'package:planets_app/core/presentation/design/tokens/colors.dart';
 import 'package:planets_app/core/presentation/utils/dimens_extension.dart';
 import 'package:planets_app/core/presentation/utils/paths/paths_images.dart';
 import 'package:planets_app/core/presentation/utils/routes.dart';
 import 'package:planets_app/features/planets/presentation/info_planets/info_planets_controller.dart';
+import 'package:planets_app/features/planets/presentation/info_planets/info_planets_state.dart';
 import 'package:planets_app/features/planets/presentation/info_planets/widgets/card_information_planet.dart';
 
 class InfoPlanetsPage extends ConsumerStatefulWidget {
@@ -22,21 +25,23 @@ class InfoPlanetsPage extends ConsumerStatefulWidget {
 class _InfoPlanetsState extends ConsumerState<InfoPlanetsPage> {
   @override
   void initState() {
-    Future.delayed(Duration.zero, () async {
-      bool success = await ref
-          .watch(infoPlanetsController.notifier)
-          .initData(widget.planetName);
-      if (!success) {
-        if (!context.mounted) return;
-        context.go(Routes.planetNoFound);
-      }
-    });
+    Future.delayed(Duration.zero, () async => initData(context));
     super.initState();
+  }
+
+  Future<void> initData(BuildContext context) async {
+    bool success = await ref
+        .watch(infoPlanetsController.notifier)
+        .initData(widget.planetName);
+    if (!success) {
+      if (!context.mounted) return;
+      context.go(Routes.planetNoFound);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    //var controller = ref.watch(infoPlanetsController.notifier);
+    var controller = ref.watch(infoPlanetsController.notifier);
     var state = ref.watch(infoPlanetsController);
     return PrincipalBackground(
         child: Row(
@@ -76,7 +81,15 @@ class _InfoPlanetsState extends ConsumerState<InfoPlanetsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  PrimaryButton(text: "Marcar como favorito", onPressed: () {}),
+                  PrimaryButton(
+                      text: state.isFavoritePlanet!
+                          ? "Quitar de Favorito"
+                          : "Marcar como favorito",
+                      backgroundColor:
+                          state.isFavoritePlanet! ? colors.red1 : null,
+                      onPressed: () => state.isFavoritePlanet!
+                          ? deleteFavorite(controller)
+                          : onFavoritePlanet(controller, state)),
                   const SizedBox(width: 20),
                   PrimaryButton(
                       text: "Buscar otro planeta",
@@ -88,5 +101,16 @@ class _InfoPlanetsState extends ConsumerState<InfoPlanetsPage> {
         ),
       ],
     ));
+  }
+
+  void onFavoritePlanet(
+      InfoPlanetsController controller, InfoPlanetsState state) {
+    prefs.favoritePlanet = state.selectedPlanet?.toRawJson() ?? "";
+    controller.setFavoritePlanet(true);
+  }
+
+  void deleteFavorite(InfoPlanetsController controller) {
+    prefs.favoritePlanet = "";
+    controller.setFavoritePlanet(false);
   }
 }

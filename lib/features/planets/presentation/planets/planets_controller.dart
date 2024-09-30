@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:planets_app/core/presentation/utils/user_preferences.dart';
+import 'package:planets_app/core/data/user_preferences.dart';
 import 'package:planets_app/features/planets/data/planets_repository.dart';
 import 'package:planets_app/features/planets/domain/list_planets_response.dart';
 import 'planets_state.dart';
@@ -13,14 +13,13 @@ class PlanetsController extends StateNotifier<PlanetsState> {
 
   Future<ListPlanetsResponse> getListPlanets() async {
     ListPlanetsResponse response;
-
     if (prefs.listPlanets.isEmpty) {
       response = await repository.getListPlanets();
       prefs.listPlanets = response.toRawJson();
     } else {
       response = ListPlanetsResponse.fromJson(json.decode(prefs.listPlanets));
     }
-
+    getFavoritePlanet();
     state = state.copyWith(
         listPlanets: response.data, filterListPlanets: response.data);
     return response;
@@ -37,6 +36,18 @@ class PlanetsController extends StateNotifier<PlanetsState> {
     state = state.copyWith(filterListPlanets: filterListPlanets);
 
     return filterListPlanets;
+  }
+
+  void getFavoritePlanet() {
+    try {
+      if (prefs.favoritePlanet.isNotEmpty) {
+        Planet x = Planet.fromJson(json.decode(prefs.favoritePlanet));
+        state = state.copyWith(favoritePlanet: x);
+        print("Hay planeta favorito");
+      }
+    } catch (e) {
+      print("Error en planeta fovorito");
+    }
   }
 }
 

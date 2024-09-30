@@ -95,7 +95,8 @@ class PrimaryButton extends StatelessWidget {
   _getBackgroundColor(ButtonType buttonType) {
     switch (buttonType) {
       case ButtonType.primary:
-        return textColor ?? (enabled ? colors.primaryColor : colors.gray1);
+        return backgroundColor ??
+            (enabled ? colors.primaryColor : colors.gray1);
 
       case ButtonType.secondary:
         return backgroundColor ??
