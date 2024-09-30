@@ -25,12 +25,12 @@ class PlanetNoFoundPage extends ConsumerWidget {
             color: Colors.white,
           ),
           const CustomText(
-            "Planeta no encontrado",
+            "Planet no found",
             fontSize: 32,
           ),
           const SizedBox(height: 20),
           PrimaryButton(
-              text: "Reintentar busqueda",
+              text: "Retry search",
               width: context.width(.5),
               onPressed: () => context.go(Routes.planets))
         ],

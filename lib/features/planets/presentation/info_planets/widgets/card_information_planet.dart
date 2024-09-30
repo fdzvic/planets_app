@@ -60,7 +60,7 @@ class CardInformationPlanet extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const CustomText(
-            "Información adicional",
+            "Additional information",
             fontSize: 24,
             fontWeight: FontWeight.w500,
           ),
@@ -84,7 +84,7 @@ class CardInformationPlanet extends StatelessWidget {
                   color: Colors.white,
                 ),
                 SizedBox(height: 10),
-                CustomText("Cargando")
+                CustomText("Loading...")
               ],
             )
           ]
@@ -96,35 +96,35 @@ class CardInformationPlanet extends StatelessWidget {
   getNameKey(String key) {
     switch (key) {
       case "name":
-        return "Nombre";
+        return "Name";
       case "description":
-        return "Descripción";
+        return "Description";
       case "orbital_distance_km":
-        return "Distancia orbital";
+        return "Orbital distance";
       case "equatorial_radius_km":
-        return "Radio ecuatorial";
+        return "Equatorial radius";
       case "volume_km3":
         return "Volumen";
       case "mass_kg":
-        return "Masa";
+        return "Mass";
       case "density_g_cm3":
-        return "Densidad";
+        return "Density";
       case "surface_gravity_m_s2":
-        return "Gravedad superficial";
+        return "Surface gravity";
       case "escape_velocity_kmh":
-        return "Velocidad de escape";
+        return "Escape velocity";
       case "day_length_earth_days":
-        return "Duración del día en dias tierra";
+        return "Day length earth days";
       case "year_length_earth_days":
-        return "Duración del año en dias tierra";
+        return "Year length earth days";
       case "orbital_speed_kmh":
-        return "Velocidad orbital";
+        return "Orbital speed";
       case "atmosphere_composition":
-        return "Composición atmosferica";
+        return "Atmosphere composition";
       case "moons":
-        return "Lunas";
+        return "Moons";
       case "year_length_earth_years":
-        return "Duración del año en años tierra";
+        return "Year length earth years";
       default:
         return key;
     }

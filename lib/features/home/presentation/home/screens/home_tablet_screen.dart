@@ -27,7 +27,7 @@ class HomeTabletScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CustomText(
-              " ¡Bienvenido a Planets App!",
+              "¡Welcome to Planets App!",
               fontSize: 32,
               fontWeight: FontWeight.w700,
             ),
@@ -44,14 +44,14 @@ class HomeTabletScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const CustomText(
-                    "Estamos emocionados de que te unas a nosotros en este viaje a través del cosmos. Aquí podrás explorar los misterios de los planetas de nuestro sistema solar, descubrir curiosidades fascinantes y aprender sobre sus características únicas.\n\nPrepárate para deslumbrarte con la belleza del universo. ¡Comencemos a explorar juntos!",
+                    "We are excited to have you join us on this journey through the cosmos. Here you will be able to explore the mysteries of the planets in our solar system, discover fascinating curiosities, and learn about their unique characteristics.\n\nGet ready to be dazzled by the beauty of the universe. Let's start exploring together!",
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 50,
                   ),
                   PrimaryButton(
-                    text: "Ver planetas",
+                    text: "See planets",
                     isLoading: homeState.isLoading,
                     onPressed: () => toContinue(context),
                   )

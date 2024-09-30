@@ -53,20 +53,20 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const CustomText(
-                        "Panel de control",
+                        "Control panel",
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                       ),
                       const SizedBox(height: 30),
                       CustomTextFormField(
-                        label: "Filtrar por nombre del planeta",
+                        label: "Filter by planet name",
                         controller: tecFilter,
                         onChanged: (x) => controller.filterPlanetsByName(x),
                       ),
                       if (prefs.favoritePlanet.isNotEmpty) ...[
                         const SizedBox(height: 20),
                         const CustomText(
-                          "Planeta favorito",
+                          "Favorite planet",
                           fontSize: 24,
                         ),
                         const SizedBox(height: 10),
@@ -75,7 +75,8 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
                           width: context.width(.2),
                           child: CardPlanet(
                             imageHeight: context.width(.17),
-                            name: state.favoritePlanet?.name ?? "No hay nombre",
+                            name:
+                                state.favoritePlanet?.name ?? "Name not found",
                             pathImage: state.favoritePlanet?.image ?? "",
                           ),
                         )
@@ -92,7 +93,7 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
                   children: [
                     const SizedBox(height: 30),
                     const CustomText(
-                      "Selecciona un planeta para obtener\nmás información.",
+                      "Select a planet to get\nmore information.",
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                       textAlign: TextAlign.center,
@@ -112,7 +113,7 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
                                   size: 50,
                                 ),
                                 SizedBox(height: 10),
-                                CustomText("No se encontró ningun planeta"),
+                                CustomText("No planet was found"),
                               ],
                             )),
                       )
@@ -157,7 +158,7 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomText(
-                  "Ocurrió un error inesperado, por favor recargue la página."),
+                  "An unexpected error occurred, please reload the page."),
             ],
           ));
         }
@@ -170,7 +171,7 @@ class _PlanetsState extends ConsumerState<PlanetsPage> {
               color: Colors.white,
             ),
             SizedBox(height: 10),
-            CustomText("Estamos cargando la información...")
+            CustomText("We are loading the information...")
           ],
         ));
       },
