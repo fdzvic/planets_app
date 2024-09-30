@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:planets_app/core/data/user_preferences.dart';
@@ -43,10 +44,9 @@ class PlanetsController extends StateNotifier<PlanetsState> {
       if (prefs.favoritePlanet.isNotEmpty) {
         Planet x = Planet.fromJson(json.decode(prefs.favoritePlanet));
         state = state.copyWith(favoritePlanet: x);
-        print("Hay planeta favorito");
       }
     } catch (e) {
-      print("Error en planeta fovorito");
+      log("Error");
     }
   }
 }

@@ -18,7 +18,6 @@ class InfoPlanetsController extends StateNotifier<InfoPlanetsState> {
       getFavoditePlanet();
       return true;
     } catch (e) {
-      print("sucedio un error");
       return false;
     }
   }

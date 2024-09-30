@@ -140,7 +140,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
               absorbing: focusNode.hasFocus,
               child: TextFormField(
                 focusNode: focusNode,
-                onFieldSubmitted: (value) => print(value),
+                onFieldSubmitted: widget.onFieldSubmitted,
                 controller: widget.controller,
                 validator: (x) => _validateInput(x ?? ''),
                 onChanged: widget.onChanged,

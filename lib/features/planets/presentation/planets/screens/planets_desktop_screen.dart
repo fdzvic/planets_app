@@ -54,6 +54,8 @@ class PlanetsDesktopScreen extends StatelessWidget {
                       CustomTextFormField(
                         label: "Filter by planet name",
                         controller: tecFilter,
+                        onFieldSubmitted: (p0) => context
+                            .go('${Routes.planets}/${tecFilter.text.trim()}'),
                         onChanged: (x) => controller.filterPlanetsByName(x),
                       ),
                       if (prefs.favoritePlanet.isNotEmpty) ...[
@@ -125,10 +127,8 @@ class PlanetsDesktopScreen extends StatelessWidget {
                           itemCount: state.filterListPlanets!.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                              onTap: () {
-                                context.go(
-                                    '${Routes.planets}/${state.filterListPlanets![index].name}');
-                              },
+                              onTap: () => context.go(
+                                  '${Routes.planets}/${state.filterListPlanets![index].name}'),
                               child: CardPlanet(
                                 name: state.filterListPlanets![index].name,
                                 pathImage:
