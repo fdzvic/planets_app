@@ -17,8 +17,7 @@ La estructura del proyecto está organizada de la siguiente manera:
   - `core/`
     - `data/`: Aquí se manejan los datos de la aplicación.
     - `domain/`: Contiene la lógica de negocio.
-    - `presentation/`: Incluye los widgets y la interfaz de usuario.
-    - `design/`: Configurada bajo los principios de Atomic Design para mantener una coherencia visual en los componentes.
+    - `presentation/`: Incluye las herramientas y widgets globales de la aplicación organizados bajo la metodologia atomic design.
   - `features/`: Contiene las funcionalidades específicas de la aplicación.
 
 ## Despliegue
@@ -35,7 +34,7 @@ El código fuente de la aplicación está disponible en GitHub:
 
 ## Instalación y Ejecución
 
-Para ejecutar la aplicación en tu entorno de desarrollo, sigue estos pasos:
+Para ejecutar la aplicación en vs-code, sigue estos pasos:
 
 1. Asegúrate de tener Flutter y Dart instalados en tu máquina.
 2. Abre el terminal y navega hasta el directorio del proyecto.
