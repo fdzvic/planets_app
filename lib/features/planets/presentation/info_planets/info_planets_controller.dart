@@ -37,6 +37,16 @@ class InfoPlanetsController extends StateNotifier<InfoPlanetsState> {
   void setFavoritePlanet(bool value) {
     state = state.copyWith(isFavoritePlanet: value);
   }
+
+  void onFavoritePlanet() {
+    prefs.favoritePlanet = state.selectedPlanet?.toRawJson() ?? "";
+    setFavoritePlanet(true);
+  }
+
+  void deleteFavorite() {
+    prefs.favoritePlanet = "";
+    setFavoritePlanet(false);
+  }
 }
 
 final infoPlanetsController =

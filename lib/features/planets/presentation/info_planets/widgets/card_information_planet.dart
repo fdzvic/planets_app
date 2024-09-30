@@ -8,9 +8,13 @@ class CardInformationPlanet extends StatelessWidget {
   const CardInformationPlanet({
     super.key,
     required this.state,
+    this.width,
+    this.height,
   });
 
   final InfoPlanetsState state;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +36,8 @@ class CardInformationPlanet extends StatelessWidget {
     }
 
     return Container(
-      width: context.width(.4),
-      height: context.height(.9),
+      width: width ?? context.width(.4),
+      height: height ?? context.height(.9),
       padding: const EdgeInsets.all(50),
       color: colors.blue4,
       child: Column(
