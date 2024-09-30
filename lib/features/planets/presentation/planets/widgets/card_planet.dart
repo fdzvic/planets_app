@@ -24,42 +24,29 @@ class CardPlanet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: imageHeight,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                bottom: Radius.circular(8),
-              ),
-              child: Image.network(
-                pathImage ?? "",
-                loadingBuilder: (context, child, loadingProgress) =>
-                    const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 50),
-                    SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: Padding(
-                        padding: EdgeInsets.all(5),
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
+          Expanded(
+            child: SizedBox(
+              height: imageHeight,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(8),
                 ),
-                errorBuilder: (BuildContext context, Object error,
-                    StackTrace? stackTrace) {
-                  return Image.asset(
-                    images.noImageAvailable,
-                    fit: BoxFit.cover,
-                  );
-                },
+                child: Image.network(
+                  pathImage ?? "",
+                  height: imageHeight,
+                  fit: BoxFit.cover,
+                  errorBuilder: (BuildContext context, Object error,
+                      StackTrace? stackTrace) {
+                    return Image.asset(
+                      images.noImageAvailable,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
               ),
             ),
           ),
-          const Expanded(child: SizedBox(height: 10)),
+          const SizedBox(height: 10),
           CustomText(
             name,
             height: 1.5,
