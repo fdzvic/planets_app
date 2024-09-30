@@ -1,16 +1,49 @@
-# planets_app
+# Planets App
 
-A new Flutter project.
+## Descripción
 
-## Getting Started
+Planets App es una aplicación desarrollada en Flutter que permite explorar información sobre los planetas del sistema solar. La aplicación sigue principios de arquitectura limpia, lo que facilita su mantenimiento y escalabilidad.
 
-This project is a starting point for a Flutter application.
+## Tecnologías Utilizadas
 
-A few resources to get you started if this is your first Flutter project:
+- **Flutter**: 3.22.3
+- **Dart**: 3.4.4
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Estructura del Proyecto
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+La estructura del proyecto está organizada de la siguiente manera:
+
+- `lib/`
+  - `core/`
+    - `data/`: Aquí se manejan los datos de la aplicación.
+    - `domain/`: Contiene la lógica de negocio.
+    - `presentation/`: Incluye los widgets y la interfaz de usuario.
+    - `design/`: Configurada bajo los principios de Atomic Design para mantener una coherencia visual en los componentes.
+  - `features/`: Contiene las funcionalidades específicas de la aplicación.
+
+## Despliegue
+
+La aplicación está desplegada en Firebase Hosting y se puede acceder a través de la siguiente URL:
+
+[Planets App](https://planets-app-d0b3c.web.app/#/home)
+
+## Repositorio
+
+El código fuente de la aplicación está disponible en GitHub:
+
+[Repositorio de Planets App](https://github.com/fdzvic/planets_app)
+
+## Instalación y Ejecución
+
+Para ejecutar la aplicación en tu entorno de desarrollo, sigue estos pasos:
+
+1. Asegúrate de tener Flutter y Dart instalados en tu máquina.
+2. Abre el terminal y navega hasta el directorio del proyecto.
+3. Ejecuta los siguientes comandos:
+
+   ```bash
+   flutter clean
+   flutter pub get
+   flutter run -d chrome --web-renderer html
+
+Nota: Es necesario usar el flag --web-renderer html para evitar problemas de CORS con el servidor y asegurarte de que las imágenes se muestren correctamente.
